@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="es">
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" />
+<link rel="stylesheet" type="text/css" href="content.css" />
+<link rel="stylesheet" type="text/css" href="nav.css" />
+<meta http-equiv="content-type" content="text/html;  charset=utf-8" />
+<title>5. Evaluando lo aprendido | ELECTRIFICANDO UNA VIVIENDA  </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta name="author" content="Tecnología" />
+<link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" />
+<meta name="generator" content="eXeLearning 2.8.1 - exelearning.net" />
+<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->
+<script type="text/javascript" src="exe_jquery.js"></script>
+<script type="text/javascript" src="common_i18n.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<link rel="stylesheet" type="text/css" href="udl-content.css" />
+<script type="text/javascript" src="udl-content.js"></script>
+<link rel="stylesheet" type="text/css" href="exe-rubrics.css" />
+<script type="text/javascript" src="exe-rubrics.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"  type="text/css">
+
+
+<style>
+  
+  .z-index {
+    z-index: 999;
+  }
+
+  .select-container {
+    display: inline-block;
+    position: relative;
+    z-index: 999;
+  }
+
+  .font-button {
+    padding: 8px 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 8px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    z-index: 999;
+  }
+
+  .fontButtonContainer {
+     z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* establece el wrap para que los botones se distribuyan en varias líneas */
+    gap: 5px; /* ajusta el espacio entre los botones */
+    position: static; /* fija la barra de botones en la página: static para que aparezca en la parte superior, fixed para que quede flotando */
+    top: 40px; /* fija la barra de botones en la parte superior de la página */
+    left: 0; /* fija la barra de botones en el margen izquierdo */
+    right: 0; /* fija la barra de botones en el margen derecho */
+    margin: auto; /* centra la barra de botones horizontalmente */
+  }
+    
+  /* Estilo para el desplegable */
+  select {
+    padding: 8px 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 6px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+  }
+  
+  select option {
+  text-align: left;
+  }
+  
+</style>
+
+<script>
+
+// BatexeGo v3 Juan José de Haro 
+
+// Define los textos que se ven en pantalla. Reemplazar el texto entre comillas
+
+  // Textos del menú desplegable
+    const defaultText = 'Parámetros por defecto:'; //Descripción de la opción por defecto
+    const standardText = 'Fuente estándar'; // Fuente original del documento
+    
+    const dyslexicDesc = 'Dislexia:'; // Descripción de la opción OpenDyslexic  
+    const dyslexicText = 'OpenDyslexic'; 
+    
+    const hyperlegibleDesc = 'Deficiencias visuales:'; // Descripción de la opción Atkinson Hyperlegible
+    const hyperlegibleText = 'Atkinson Hyperlegible'; 
+    
+    const highLegibilityDesc = 'Alta legibilidad:'; // Descripción de las opciones de alta legibilidad
+    const opensansText = 'OpenSans'; 
+    const robotoText = 'Roboto'; 
+    const latoText = 'Lato'; 
+    const montserratText = 'Montserrat'; 
+
+  // Botones aumentar y disminuir fuente
+    const increaseFontText = 'A+'; // Botón para incrementar la fuente
+    const increaseFontTitle = 'Incrementa la fuente'; // Texto emergente al pasar el ratón
+    
+    const decreaseFontText = 'A-'; // Botón para reducir la fuente
+    const decreaseFontTitle = 'Reduce la fuente'; // Texto emergente al pasar el ratón
+
+  // Botón para traducir
+    const translateText = '🌐'; // Texto para el botón de traducción de Google
+    const translateTitle = 'Traduce la página'; // Texto emergente al pasar el ratón
+
+  // Botón para leer / detener la lectura en voz alta
+    let readText = 'Leer'; // Botón para leer en voz alta el contenido de la página
+    const readTextTitle ='Lee en voz alta la selección o la página entera'; // Texto emergente al pasar el ratón
+    
+    const stopText = 'Detener'; // Texto del botón para detener la lectura
+    const stopTextTitle = 'Detiene la lectura'; // Texto emergente al pasar el ratón
+  
+  // Botones para que los botones estén siempre visibles
+    let floatingFix = 'Fijar'; // Texto del botón flotante cuando está sobre el texto
+    let floatingFixTitle = 'Fija la barra de botones en la parte superior'; // Texto emergente al pasar el ratón
+    
+    let floatingFloat = 'Flotar'; //Texto del botón flotante cuando está fijo en la parte superior
+    let floatingFloatTitle = 'La barra permanecerá siempre visible';
+  
+  
+  // Enlace +Info
+    const infoText = '+Info'; // Texto del enlace +Info
+    const infoTextLink = 'https://batexego.bilateria.org'; // Destino del enlace de +Info
+
+// Fin 
+  
+
+  readText = `${readText} (${document.documentElement.lang})`; //Se añade el idioma al botón Leer
+  
+
+  let originalFont;
+  let currentFontSize;
+  let originalFontSize;
+  let isReading = false;
+  let utterance = new SpeechSynthesisUtterance();
+  let googleTranslateWidgetVisible = localStorage.getItem('googleTranslateWidgetVisible');
+
+  function setFont(font) {
+  document.body.style.fontFamily = font;
+  localStorage.setItem('font', font);
+  }
+
+  function setFontSize(size) {
+  currentFontSize = parseInt(window.getComputedStyle(document.body).getPropertyValue('font-size'));
+  currentFontSize += size;
+  document.body.style.fontSize = currentFontSize + 'px';
+  localStorage.setItem('fontSize', currentFontSize + 'px');
+  }
+  
+  
+
+function toggleGoogleTranslateWidget() {
+  if (!googleTranslateWidgetVisible) {
+    const script = document.createElement('script');
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.id = 'google-translate-script';
+    document.head.appendChild(script);
+    
+    const googleTranslateElement = document.createElement('div');
+    googleTranslateElement.id = 'google_translate_element';
+    googleTranslateElement.style.position = 'fixed';
+    googleTranslateElement.style.top = '0';
+    googleTranslateElement.style.right = '0';
+    googleTranslateElement.style.zIndex = '1000';
+    document.body.appendChild(googleTranslateElement);
+
+    window.googleTranslateElementInit = function() {
+      new google.translate.TranslateElement({pageLanguage: 'auto', layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT}, 'google_translate_element');
+    };
+
+    googleTranslateWidgetVisible = true;
+    
+  } else {
+    const script = document.getElementById('google-translate-script');
+    script.remove();
+    
+    const googleTranslateElement = document.getElementById('google_translate_element');
+    googleTranslateElement.remove();
+
+    googleTranslateWidgetVisible = false;
+  }
+  localStorage.setItem('googleTranslateWidgetVisible',googleTranslateWidgetVisible);
+}
+
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    googleTranslateWidgetVisible = JSON.parse(localStorage.getItem('googleTranslateWidgetVisible'));
+  if(googleTranslateWidgetVisible) {
+    googleTranslateWidgetVisible = false;
+    toggleGoogleTranslateWidget();
+  }
+
+    
+  
+    originalFont = window.getComputedStyle(document.body).getPropertyValue('font-family');
+    localStorage.setItem('originalFont', originalFont);
+    let font = localStorage.getItem('font');
+    if (!font) {
+    font = originalFont;
+    }
+    document.body.style.fontFamily = font;
+
+    let fontSize = localStorage.getItem('fontSize');
+    originalFontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
+    localStorage.setItem('originalFontSize', originalFontSize);
+    if (!fontSize) {
+    fontSize = originalFontSize
+    localStorage.setItem('fontSize', fontSize);
+    }
+    document.body.style.fontSize = fontSize;
+
+    const fontButtonContainer = document.createElement('div');
+    fontButtonContainer.classList.add('fontButtonContainer'); 
+    
+    const selectContainer = document.createElement('div');
+    selectContainer.classList.add('select-container');
+    const select = document.createElement('select');
+    select.classList.add('z-index');
+    const standardOption = document.createElement('option');
+    standardOption.value = 'standard';
+    standardOption.text = standardText;
+
+    const defaultFontOptGroup = document.createElement('optgroup');
+    defaultFontOptGroup.label = defaultText;
+    defaultFontOptGroup.appendChild(standardOption);
+
+    select.appendChild(defaultFontOptGroup);
+
+
+    const dyslexicOption = document.createElement('option');
+    dyslexicOption.value = 'dyslexic';
+    dyslexicOption.text = dyslexicText;
+    select.add(dyslexicOption);
+
+    const dyslexicOptGroup = document.createElement('optgroup');
+    dyslexicOptGroup.label = dyslexicDesc;
+    dyslexicOptGroup.appendChild(dyslexicOption);
+    select.appendChild(dyslexicOptGroup);
+
+    const hyperlegibleOption = document.createElement('option');
+    hyperlegibleOption.value = 'hyperlegible';
+    hyperlegibleOption.text = hyperlegibleText;
+    select.add(hyperlegibleOption);
+
+    const hyperlegibleOptGroup = document.createElement('optgroup');
+    hyperlegibleOptGroup.label = hyperlegibleDesc;
+    hyperlegibleOptGroup.appendChild(hyperlegibleOption);
+    select.appendChild(hyperlegibleOptGroup);
+
+    const opensansOption = document.createElement('option');
+    opensansOption.value = 'Open Sans';
+    opensansOption.text = opensansText;
+    select.add(opensansOption);
+
+    const robotoOption = document.createElement('option');
+    robotoOption.value = 'Roboto';
+    robotoOption.text = robotoText;
+    select.add(robotoOption);
+
+    const latoOption = document.createElement('option');
+    latoOption.value = 'Lato';
+    latoOption.text = latoText;
+    select.add(latoOption);
+
+    const montserratOption = document.createElement('option');
+    montserratOption.value = 'Montserrat';
+    montserratOption.text = montserratText;
+    select.add(montserratOption);  
+    
+
+    const highLegibilityOptGroup = document.createElement('optgroup');
+    highLegibilityOptGroup.label = highLegibilityDesc;
+    highLegibilityOptGroup.appendChild(latoOption);
+    highLegibilityOptGroup.appendChild(montserratOption);
+    highLegibilityOptGroup.appendChild(opensansOption);
+    highLegibilityOptGroup.appendChild(robotoOption);
+    
+    
+    
+    select.appendChild(highLegibilityOptGroup);
+
+    // Seleccionar la opción correspondiente al cargar la página
+    if (font === originalFont) { // Nueva condición
+    select.selectedIndex = 0; // Nueva línea
+    } else if (font === 'OpenDyslexic') {
+    select.selectedIndex = 1;
+    } else if (font === 'Atkinson Hyperlegible') {
+    select.selectedIndex = 2;
+    } else if (font === 'Roboto') {
+    select.selectedIndex = 6;
+    } else if (font === 'Lato') {
+    select.selectedIndex = 3;
+    } else if (font === 'Open Sans') {
+    select.selectedIndex = 5;
+    } else if (font === 'Montserrat') {
+    select.selectedIndex = 4;
+    }
+
+    select.addEventListener('change', () => {
+    const font = select.value;
+    if (font === 'standard') {
+    setFont(originalFont);
+    fontSize = originalFontSize;
+    localStorage.setItem('fontSize', fontSize);
+    document.body.style.fontSize = localStorage.getItem('originalFontSize');
+    } else if (font === 'dyslexic') {
+    setFont('OpenDyslexic');
+    } else if (font === 'hyperlegible') {
+    setFont('Atkinson Hyperlegible');
+    } else if (font === 'Open Sans') {
+    setFont('Open Sans');
+    } else if (font === 'Roboto') {
+    setFont('Roboto');
+    } else if (font === 'Lato') {
+    setFont('Lato');
+    }  else if (font === 'Montserrat') {
+    setFont('Montserrat');
+    }
+    });
+
+    selectContainer.appendChild(select);
+    fontButtonContainer.appendChild(selectContainer);
+    
+
+    const increaseFontButton = document.createElement('button');
+    increaseFontButton.classList.add('font-button');
+    increaseFontButton.textContent = increaseFontText;
+    increaseFontButton.setAttribute('title', increaseFontTitle);
+    increaseFontButton.addEventListener('click', () => setFontSize(1));
+    fontButtonContainer.appendChild(increaseFontButton);
+
+    const decreaseFontButton = document.createElement('button');
+    decreaseFontButton.classList.add('font-button');
+    decreaseFontButton.textContent = decreaseFontText;
+    decreaseFontButton.setAttribute('title', decreaseFontTitle);
+    decreaseFontButton.addEventListener('click', () => setFontSize(-1));
+    fontButtonContainer.appendChild(decreaseFontButton);
+    
+    const translateButton = document.createElement('button');
+    translateButton.classList.add('font-button');
+    translateButton.textContent = translateText;
+    translateButton.setAttribute('title', translateTitle);
+    translateButton.addEventListener('click', toggleGoogleTranslateWidget);
+    fontButtonContainer.appendChild(translateButton);
+
+  // Botón para leer en voz alta
+    const readButton = document.createElement('button');
+    readButton.classList.add('font-button');
+    readButton.textContent = readText;
+    readButton.setAttribute('title', readTextTitle);
+    
+    readButton.addEventListener('click', () => {
+    let selectedText = window.getSelection().toString();
+    let text = '';
+    let lang = document.documentElement.lang;
+    if (selectedText !== '') {
+      text = selectedText;
+      let selectedNode = window.getSelection().anchorNode;
+      while (selectedNode && selectedNode.nodeType !== Node.ELEMENT_NODE) {
+        selectedNode = selectedNode.parentNode;
+      }
+      if (selectedNode) {
+        const selectedLang = selectedNode.getAttribute('lang');
+        if (selectedLang) {
+          lang = selectedLang;
+        }
+      }
+    } else {
+      text = document.body.innerText;
+      const bodyLang = document.body.getAttribute('lang');
+      if (bodyLang) {
+        lang = bodyLang;
+      }
+    }
+
+    utterance.lang = lang;
+    utterance.text = text;
+
+    if (!isReading) {
+      isReading = true;
+      readButton.textContent = `${stopText} (${lang})`;
+      readButton.setAttribute('title', stopTextTitle);
+      speechSynthesis.speak(utterance);
+    } else {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+      speechSynthesis.cancel();
+    }
+
+    utterance.addEventListener('end', () => {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+    });
+  });  
+    
+    fontButtonContainer.appendChild(readButton);
+    
+  // Botón para que la barra esté siempre visible
+    const floatingButton = document.createElement('button');
+    floatingButton.classList.add('font-button');
+    floatingButton.textContent = floatingFloat;
+    floatingButton.setAttribute('title', floatingFloatTitle);
+    floatingButton.addEventListener('click', () => {
+    if (floatingButton.textContent === floatingFix) {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+      localStorage.setItem('floatState', 'static');
+    } else {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+      localStorage.setItem('floatState', 'fixed');
+    }
+  });
+
+    
+
+    let floatState = localStorage.getItem('floatState');
+    if (!floatState) {
+      floatState = 'static';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    }
+    if (floatState === 'fixed') {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    } else {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+    }
+    
+    localStorage.setItem('floatState', floatState);
+    
+  fontButtonContainer.appendChild(floatingButton);
+
+
+    const infoLink = document.createElement('a');
+    infoLink.textContent = infoText;
+    infoLink.href = infoTextLink;
+    infoLink.target = '_blank';
+    infoLink.style.marginLeft = '8px';
+    infoLink.style.fontSize = '12px';
+    fontButtonContainer.appendChild(infoLink);
+
+    
+    infoLink.classList.add('z-index');
+
+    document.body.insertBefore(fontButtonContainer, document.body.firstChild);
+   
+  });
+  
+  
+
+</script></head>
+<body class="exe-web-site" id="exe-node-158"><script type="text/javascript">document.body.className+=" js"</script>
+<div id="content">
+<p id="skipNav"><a href="#main" class="sr-av">Saltar la navegación</a></p>
+<header id="header" ><div id="headerContent">ELECTRIFICANDO UNA VIVIENDA </div></header>
+<nav id="siteNav">
+<ul>
+   <li><a href="index.html" class="daddy main-node">Situación de Aprendizaje 4. Electrificando una vivienda</a></li>
+   <li><a href="antes_de_empezar.html" class="no-ch">Antes de empezar</a></li>
+   <li><a href="1_diseando_nuestro_circuito_elctrico.html" class="no-ch">1. Diseñando nuestro circuito eléctrico</a></li>
+   <li><a href="2_explorando_acerca_de_la_electricidad.html" class="no-ch">2. Explorando acerca de la electricidad</a></li>
+   <li><a href="3_estructurando_nuestro_conocimiento.html" class="daddy">3. Estructurando nuestro conocimiento</a>
+   <ul class="other-section">
+      <li><a href="31_electricidad_energa_elctrica_conductores_y_aislantes.html" class="daddy">3.1. Electricidad. Energía eléctrica. Conductores y aislantes.</a>
+      <ul class="other-section">
+         <li><a href="unidad.html" class="no-ch">Unidad</a></li>
+      </ul>
+      </li>
+      <li><a href="32_circuito_elctrico_y_componentes_simbologa_y_representacin.html" class="no-ch">3.2. Circuito eléctrico y componentes. Simbología y representación.</a></li>
+      <li><a href="33_las_magnitudes_elctricas_la_ley_de_ohm_la_potencia_elctrica.html" class="no-ch">3.3. Las magnitudes eléctricas. La Ley de Ohm. La potencia eléctrica.</a></li>
+      <li><a href="34_circuitos_elctricos_abiertos_cerrados_y_en_cortocircuito.html" class="no-ch">3.4. Circuitos eléctricos abiertos, cerrados y en cortocircuito.</a></li>
+      <li><a href="35_cculo_de_resistencias_equivalentes.html" class="daddy">3.5. Cáculo de resistencias equivalentes</a>
+      <ul class="other-section">
+         <li><a href="351_resistencias_en_serie.html" class="no-ch">3.5.1. Resistencias en serie</a></li>
+         <li><a href="352_resistencias_en_paralelo.html" class="no-ch">3.5.2. Resistencias en paralelo</a></li>
+      </ul>
+      </li>
+   </ul>
+   </li>
+   <li><a href="4_aplicando_lo_aprendido.html" class="no-ch">4. Aplicando lo aprendido</a></li>
+   <li id="active"><a href="5_evaluando_lo_aprendido.html" class="active no-ch">5. Evaluando lo aprendido</a></li>
+</ul>
+</nav>
+<div id='topPagination'>
+<nav class="pagination noprt">
+<a href="4_aplicando_lo_aprendido.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><span class="page-counter">Página <strong>15</strong> de <strong>15</strong></span>
+</nav>
+</div>
+<div id="main-wrapper">
+<section id="main">
+<header id="nodeDecoration"><h1 id="nodeTitle">5. Evaluando lo aprendido</h1></header>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_exp_cuestionario" id="id770">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">1. Introducción a la evaluación</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta770_485_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-expression"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p>La evaluación, coevaluación y autoevaluación son procesos que nos ayudan a mejorar nuestro aprendizaje y a desarrollar nuestras competencias.</p>
+<ul>
+<li>La <strong>evaluación</strong> es la valoración que hace el <strong>profesor o la profesora</strong> de nuestro trabajo, teniendo en cuenta los criterios y los estándares de aprendizaje establecidos.</li>
+<li>La <strong>coevaluación</strong> es la valoración que hacemos de nuestros <strong>compañeros o compañeras</strong>, siguiendo las mismas pautas que el profesor o la profesora.</li>
+<li>La <strong>autoevaluación</strong> es la valoración que hacemos de <strong>nosotros mismos</strong>, reflexionando sobre nuestros puntos fuertes y débiles, y sobre las acciones que podemos realizar para mejorar.</li>
+</ul>
+<p>Estos tres procesos son importantes porque nos permiten conocer nuestro nivel de aprendizaje, identificar nuestros errores y aciertos, y proponer medidas para superar las dificultades y avanzar en nuestro desarrollo personal y académico. Además, nos ayudan a desarrollar habilidades como la autoestima, la responsabilidad, la autonomía, la crítica constructiva, el respeto, la colaboración y la comunicación.</p>
+<p>La evaluación, coevaluación y autoevaluación son complementarias y las realizaremos de forma continua y sistemática. Para ello utilizaremos diferentes instrumentos como rúbricas, escalas de valoración, listas de control, diarios de aprendizaje, portfolios, etc. Estos instrumentos nos facilitan la recogida de evidencias sobre nuestro proceso de aprendizaje y nos orientan sobre los aspectos que debemos mejorar.</p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>La evaluación, coevaluación y autoevaluación son procesos que nos ayudan a aprender y mejorar. Aquí hay un resumen:</p>
+<p>1. <strong>Evaluación</strong>: Es cuando el profesor valora nuestro trabajo según criterios establecidos. Nos dice cómo estamos haciendo las cosas.</p>
+<p>2. <strong>Coevaluación</strong>: Es cuando valoramos el trabajo de nuestros compañeros usando los mismos criterios que el profesor.</p>
+<p>3. <strong>Autoevaluación</strong>&nbsp;Es cuando valoramos nuestro propio trabajo, pensando en lo que hacemos bien y en lo que podemos mejorar.</p>
+<p>Estos procesos son importantes para entender cómo aprendemos y para mejorar nuestras habilidades.</p>
+<p>También nos ayudan a desarrollar otras habilidades como la autoestima, la responsabilidad y la comunicación.</p>
+<p>Usamos diferentes herramientas como rúbricas y diarios para recopilar pruebas de nuestro aprendizaje y saber en qué debemos trabajar.</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_eng_nota" id="id675">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">La evaluación</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta675_1385_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p>La evaluación de esta situación de aprendizaje se lleva a cabo a partir de los siguientes instrumentos:</p>
+<table border="1" style="width: 100%; height: 80px;">
+<tbody>
+<tr style="height: 10px;">
+<td style="width: 33.3333%; height: 10px; text-align: center; background-color: #65a1e6;"><strong>Criterios evaluación</strong></td>
+<td style="width: 33.3333%; height: 10px; text-align: center; background-color: #65a1e6;"><strong>Actividad</strong></td>
+<td style="width: 33.3333%; height: 10px; text-align: center; background-color: #65a1e6;"><strong>Instrumentos evaluación</strong></td>
+</tr>
+<tr style="background-color: #c1ecf7;">
+<td style="width: 33.3333%; height: 10px; text-align: center;">1.1.</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">WebQuest</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Observación directa</td>
+</tr>
+<tr style="background-color: #c1ecf7;">
+<td style="width: 33.3333%; height: 10px; text-align: center;">1.2, 2.2 y 3.1.</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Cuestionario Moodle</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Cuestionario evaluación</td>
+</tr>
+<tr style="background-color: #c1ecf7;">
+<td style="width: 33.3333%; height: 10px; text-align: center;">1.1, 1.2, 2.2,3.1 y 4.1</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Producto final</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Rúbrica</td>
+</tr>
+<tr style="background-color: #c1ecf7;">
+<td style="width: 33.3333%; height: 10px; text-align: center;">1.1, 1.2, 2.2 y 3.1&nbsp;</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Coevaluación producto final</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Lista de cotejo</td>
+</tr>
+<tr style="background-color: #c1ecf7;">
+<td style="width: 33.3333%; height: 10px; text-align: center;">1.1, 1.2, 2.2 y 3.1&nbsp;</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Autoealuación</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Rúbrica</td>
+</tr>
+<tr style="background-color: #c1ecf7;">
+<td style="width: 33.3333%; height: 10px; text-align: center;">1.1, 1.2, 3.1</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Portfolio</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Lista de cotejo</td>
+</tr>
+<tr style="background-color: #c1ecf7;">
+<td style="width: 33.3333%; height: 10px; text-align: center;">2.2, 3.1</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Prueba escrita</td>
+<td style="width: 33.3333%; height: 10px; text-align: center;">Cuestionario evaluación</td>
+</tr>
+</tbody>
+</table></div></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_exp_tareagrupal" id="id781">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">2. Crea tu propio trailer</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta781_137_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-expression"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p>En grupos, reflexionad sobre todo el proceso que habéis seguido. Como fin de trabajo, queremos que hagáis un pequeño resumen de todo el proceso. Para ello, os proponemos que elijáis entre las dos siguientes actividades:</p>
+<ul>
+<li>Grabar un pequeño vídeo de dos minutos de duración donde contéis qué habéis aprendido y qué habéis conseguido.</li>
+<li>Realizar una línea del tiempo donde resaltéis las fases de vuestro trabajo y lo que habéis aprendido en cada una de ellas.</li>
+</ul></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>n grupos, reflexionad sobre todo el proceso que habéis seguido.</p>
+<p>Como fin de trabajo, queremos que hagáis un pequeño resumen de todo el proceso.</p>
+<p>Para ello, os proponemos que elijáis entre las dos siguientes actividades:</p>
+<ul>
+<li>Grabar un pequeño vídeo de dos minutos de duración donde contéis qué habéis aprendido y qué habéis conseguido.</li>
+<li>Realizar una línea del tiempo donde resaltéis las fases de vuestro trabajo y lo que habéis aprendido en cada una de ellas.</li>
+</ul><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_eng_rubrica" id="id660">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">3. ¡Nos autoevaluamos!</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta660_813_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p>La autoevaluación es un proceso que te ayuda a mejorar tu aprendizaje. Consiste en que tú mismo te valores, teniendo en cuenta los criterios y los estándares de aprendizaje que se han establecido para cada tarea o actividad. La autoevaluación te permite conocer tus puntos fuertes y débiles, identificar tus errores y aciertos, y proponer acciones para superar las dificultades y avanzar en tu desarrollo personal y académico. La autoevaluación también te ayuda a desarrollar tu autoestima, tu responsabilidad y tu autonomía, ya que te hace más consciente de tu proceso de aprendizaje y de tus capacidades.</p>
+<p><strong>Ahora valora el aprendizaje de tus compañeros de grupo en la ficha que te ha entregado el profesor.</strong></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>La autoevaluación es un proceso en el que tú mismo te valoras considerando ciertos criterios y estándares de aprendizaje.</p>
+<p>Ayuda a identificar tus fortalezas y debilidades, reconocer aciertos y errores, y planear acciones para mejorar.</p>
+<p>La autoevaluación fomenta tu autoestima, responsabilidad y autonomía al hacerte consciente de tu aprendizaje y habilidades.<br> </p>
+<p><br>الآن قم بتقييم تعلم زملائك في المجموعة باستخدام الاستمارة التي قدمها لك المعلم.</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper RubricIdevice em_iDevice em_iDevice_udl_eng_rubrica" id="id1717">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">La rúbrica de la autoevaluación</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta1717_1414_2" class="block iDevice_content">
+<table class='exe-table'><caption>Autoevalúate con sinceridad</caption><thead><tr><th>&nbsp;</th><th>9 - 10</th><th>7 - 8,9</th><th>5 - 6,9</th><th>3 - 4.9</th><th>1 - 2,9</th></tr></thead><tbody><tr><th>Criterio 1.1</th><td>Realizo una búsqueda de información exhaustiva y crítica, contrastando diversas fuentes y evaluando con precisión su fiabilidad y pertinencia. Adicionalmente, muestro conciencia de los riesgos y beneficios del uso de internet en la búsqueda de información. <span>(2,5)</span></td><td>Realizo una búsqueda de información exhaustiva, contrastando diferentes fuentes y evaluando de manera efectiva su fiabilidad. <span>(2)</span></td><td>Realizo una búsqueda adecuada de información en diferentes fuentes y muestro un intento de evaluación de su fiabilidad, aunque con algunas inconsistencias. <span>(1,5)</span></td><td>Realizo una búsqueda mínima de información pero no demuestro un análisis crítico de las fuentes ni evalúo su fiabilidad.. <span>(1)</span></td><td>No busco información adicional ni evalúa la fiabilidad de la información presentada. <span>(0,5)</span></td></tr><tr><th>Criterio 2.1</th><td>Se me ocurren y propongo soluciones a los problemas que tengo que resolver, y son excelentes y originales. Utilizo lo que sé de otras asignaturas, y lo hago con criterio y reflexión. Pienso en el medio ambiente, y lo hago con rigor y argumentos. Tengo ganas de hacer las cosas bien o de mejorar, y valoro lo que hago y las consecuencias que tiene. <span>(2,5)</span></td><td>Se me ocurren y propongo soluciones a los problemas que tengo que resolver, y son buenas y diferentes a otras. Utilizo lo que sé de otras asignaturas, y lo hago bien y con imaginación. Pienso en el medio ambiente, y lo hago con sentido y coherencia. Tengo ganas de hacer las cosas bien o de mejorar, y sé lo que tengo que hacer y lo que me conviene. <span>(2)</span></td><td>Se me ocurren y propongo soluciones a los problemas que tengo que resolver, pero son muy simples o parecidas a otras. Utilizo lo que sé de otras asignaturas, pero solo lo básico o lo más fácil. Pienso en el medio ambiente, pero solo en lo necesario o lo más obvio. Tengo ganas de hacer las cosas bien o de mejorar, pero me cuesta o me confundo a veces. <span>(1,5)</span></td><td>Se me ocurren y propongo soluciones a los problemas que tengo que resolver, pero me faltan elementos o no están bien hechas. Uso un poco lo que se de otras asignaturas, pero no lo suficiente o no lo hago bien. Pienso un poco en el medio ambiente, pero me equivoco o no le doy mucha importancia. Tengo pocas ganas de hacer las cosas bien o de mejorar. <span>(1)</span></td><td>No se me ocurren ni propongo soluciones a los problemas que tengo que resolver. No uso lo que se de otras asignaturas. No pienso en el medio ambiente. No tengo ganas de hacer las cosas bien ni de mejorar. <span>(0,5)</span></td></tr><tr><th>Criterio 3.1</th><td>Fabrico objetos o modelos sencillos que resuelven el problema planteado de forma óptima y original. Empleo los materiales , las herramientas y máquinas elementales necesarias de forma crítica y reflexiva. Aplico los conocimientos básicos de estructuras que se requieren de forma rigurosa y argumentada. Respeto las normas de seguridad y salud que se establecen de forma ejemplar e integrada. <span>(2,5)</span></td><td>Fabrico objetos o modelos sencillos que resuelven el problema planteado de forma eficaz e innovadora. Empleo los materiales, las herramientas y máquinas elementales necesarias de forma eficiente y creativa. Aplico los conocimientos básicos de estructuras que se requieren de forma razonada y coherente. Respeto las normas de seguridad y salud que se establecen de forma rigurosa y responsable. <span>(2)</span></td><td>Fabrico objetos o modelos sencillos que resuelven el problema planteado de forma aceptable pero poco original. Empleo los materiales, las herramientas y máquinas elementales necesarias de forma suficiente pero poco variada. Aplico los conocimientos básicos de estructuras que se requieren de forma correcta pero poco elaborada. Respeto las normas de seguridad y salud que se establecen de forma adecuada pero poco rigurosa. <span>(1,5)</span></td><td>Fabrico objetos o modelos sencillos que resuelven el problema planteado de forma parcial o defectuosa. Empleo los materiales, las herramientas y máquinas elementales necesarias de forma insuficiente o incorrecta. Aplico los conocimientos básicos de estructuras que se requieren de forma superficial o errónea. Respeto las normas de seguridad y salud que se establecen de forma escasa o inadecuada. <span>(1)</span></td><td>No fabrico objetos o modelos sencillos que resuelven el problema planteado. No empleo los materiales adecuados ni las herramientas y máquinas elementales necesarias. No aplico los conocimientos básicos de estructuras que se requieren. No respeto las normas de seguridad y salud que se establecen. <span>(0,5)</span></td></tr><tr><th>Criterio 4.1</th><td>Represento y comunico el proceso de creación del producto con claridad, coherencia y profundidad, mostrando un excelente dominio del tema. Elaboro documentación técnica y gráfica básica siguiendo las normas básicas con excelencia y originalidad. Utilizo herramientas digitales de forma innovadora y eficiente, explorando nuevas posibilidades. Empleo los formatos y el vocabulario técnico de forma precisa, variada y enriquecedora. Trabajo de manera colaborativa de forma constante, comprometida y solidaria, tanto presencialmente como en remoto. <span>(2,5)</span></td><td>Represento y comunico el proceso de creación del producto con claridad, coherencia y detalle, mostrando un buen dominio del tema. Elaboro documentación técnica y gráfica básica siguiendo las normas básicas con rigor y calidad. Utilizo herramientas digitales de forma eficaz y creativa, aprovechando sus posibilidades. Empleo los formatos y el vocabulario técnico de forma precisa y variada. Trabajo de manera colaborativa de forma constante y con compromiso, tanto presencialmente como en remoto. <span>(2)</span></td><td>Represento y comunico el proceso de creación del producto con claridad y coherencia, aunque con algunos aspectos mejorables. Elaboro documentación técnica y gráfica básica siguiendo las normas básicas con corrección. Utilizo herramientas digitales de forma adecuada, aunque sin mucha creatividad. Empleo los formatos y el vocabulario técnico de forma correcta. Trabajo de manera colaborativa de forma habitual y con una implicación básica, tanto presencialmente como en remoto. <span>(1,5)</span></td><td>Represento y comunico parcialmente el proceso de creación del producto con algunos errores e incoherencias. Elaboro documentación técnica y gráfica básica con dificultades para seguir las normas básicas. Utilizo herramientas digitales con limitaciones o sin aprovechar sus posibilidades. Empleo los formatos y el vocabulario técnico de forma irregular o incompleta. Trabajo de manera colaborativa de forma ocasional o con poca implicación, tanto presencialmente como en remoto. <span>(1)</span></td><td>No represento ni comunico el proceso de creación del producto o lo hago con graves errores e incoherencias. No elaboro documentación técnica ni gráfica o lo hago sin seguir las normas básicas. No utilizo herramientas digitales o las utilizo inadecuadamente. No empleo los formatos ni el vocabulario técnico. No trabajo de manera colaborativa ni presencial ni en remoto o muestro una actitud negativa hacia el trabajo en equipo. <span>(0,5)</span></td></tr></tbody></table><ul class="exe-rubric-strings"><li class="activity">Actividad</li><li class="name">Nombre</li><li class="date">Fecha</li><li class="score">Puntuación</li><li class="notes">Notas</li><li class="reset">Reiniciar</li><li class="print">Imprimir</li><li class="apply">Aplicar</li><li class="newWindow">Ventana nueva</li></ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_eng_rubrica" id="id673">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">4. ¡Evaluamos a nuestros compañeros!</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta673_1383_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p>La coevaluación es un proceso que te ayuda a mejorar tu aprendizaje junto con tus compañeros o compañeras. Consiste en que vosotros os valoréis unos a otros, siguiendo las mismas pautas que el profesor o la profesora, y os deis feedback constructivo sobre vuestro trabajo. La coevaluación te permite conocer el nivel de aprendizaje de tus compañeros o compañeras, comparar tu trabajo con el de ellos, y aprender de sus aciertos y errores. La coevaluación también te ayuda a desarrollar habilidades como el respeto, la colaboración y la comunicación, ya que te hace más empático y solidario con tus compañeros o compañeras, y te permite expresar tu opinión de forma respetuosa y argumentada. Por eso, la coevaluación es importante y debes realizarla de forma honesta y responsable. Ahora valora el aprendizaje de tus compañeros de grupo en la ficha que te ha entregado el profesor.</p>
+<p><strong>Ahora valora el aprendizaje de tus compañeros de grupo en la ficha que te ha entregado el profesor.</strong></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>La coevaluación es un proceso en el que tú y tus compañeros se evalúan mutuamente, siguiendo las mismas pautas del profesor.</p>
+<p>Esto te ayuda a conocer el nivel de aprendizaje de tus compañeros, comparar tu trabajo con el de ellos y aprender de sus aciertos y errores.</p>
+<p>También desarrolla habilidades como el respeto, la colaboración y la comunicación.</p>
+<p>Es importante hacerlo de manera honesta y responsable.<br> </p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper RubricIdevice em_iDevice em_iDevice_udl_eng_rubrica" id="id1719">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">Rúbrica de coevaluación del trabajo cooperativo</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta1719_1413_2" class="block iDevice_content">
+<table class='exe-table'><caption>Rúbrica para evaluar el trabajo en equipo</caption><thead><tr><th>&nbsp;</th><th>10 - 9</th><th>8,9 - 7</th><th>6,9 - 5</th><th>4,9 - 3</th><th>1 - 2,9</th></tr></thead><tbody><tr><th>Participación y colaboración</th><td>Todos los miembros del equipo han participado activamente en las tareas propuestas y han colaborado ayudando a los demás. <span>(2,5)</span></td><td>La mayor parte de los miembros del equipo han participado activamente en las tareas propuestas y han colaborado ayudando a los demás. <span>(2)</span></td><td>La mitad de los miembros del equipo ha participado activamente en las tareas propuestas y han colaborado ayudándose entre sí. <span>(1,5)</span></td><td>Menos de la mitad de los miembros del equipo ha participado activamente en las tareas propuestas y han colaborado ayudándose entre sí. <span>(1)</span></td><td>Solo un miembro del equipo (o ninguno) ha participado de forma activa en las tareas propuestas y no ha habido colaboración ni ayuda entre ellos. <span>(0,5)</span></td></tr><tr><th>Distribución de las tareas</th><td>Las tareas se han repartido de forma equitativa entre todos los miembros del equipo. <span>(2,5)</span></td><td>La mayor parte de las tareas se han repartido de forma equitativa entre todos los miembros del equipo. <span>(2)</span></td><td>Solo la mitad de las tareas se ha repartido de forma equitativa entre todos los miembros del equipo. <span>(1,5)</span></td><td>Ha habido un reparto desigual de las tareas entre los diferentes miembros del equipo. <span>(1)</span></td><td>Ha habido un reparto muy desigual de las tareas entre los diferentes miembros del equipo. <span>(0,5)</span></td></tr><tr><th>Integración ente los miembros del equipo</th><td>Durante la realización de todas las tareas, los miembros del equipo han expresado libremente sus opiniones y puntos de vista, han escuchado las opiniones de los demás y han sido capaces de llegar a un consenso. <span>(2,5)</span></td><td>Durante la realización de la mayor parte de las tareas, los miembros del equipo han expresado sus opiniones con libertad, han escuchado a los demás y han sido capaces de llegar a un consenso. <span>(2)</span></td><td>Durante la realización de las tareas, solo la mitad de los miembros del equipo ha expresado libremente sus opiniones, ha escuchado las de los demás y han logrado ponerse de acuerdo. <span>(1,5)</span></td><td>Durante la realización de las tareas, menos de la mitad de los miembro del equipo ha expresado su opinión, no ha habido diálogo y se ha terminado imponiendo la opinión de la minoría de las personas. <span>(1)</span></td><td>Durante la realización de las tareas, solo un miembro del equipo ha expresado su opinión, no ha habido diálogo y se ha terminado imponiendo la opinión de una sola persona. <span>(0,5)</span></td></tr><tr><th>Asunción de funciones y responsabilidades</th><td>Todos los miembros del equipo han ejercicio muy bien sus funciones y han cumplido a la perfección sus responsabilidades. <span>(2,5)</span></td><td>La mayor parte de los miembros del equipo ha ejercido sus funciones y ha cumplido con sus responsabilidades. <span>(2)</span></td><td>Solo la mitad de los componentes del equipo ha ejercido bien sus funciones y ha cumplido con sus responsabilidades. <span>(1,5)</span></td><td>Menos de la mitad de los miembros del equipo ha ejercido bien sus funciones y han cumplido con sus responsabilidades. <span>(1)</span></td><td>Solo un miembro del equipo (o ninguno) ha ejercido bien sus funciones y ha cumplido con sus responsabilidades. <span>(0,5)</span></td></tr></tbody></table><p class="exe-rubric-authorship"><a href="http://cedec.intef.es/" target="_blank" class="author" rel="noopener">CEDEC</a>. <span class="title"><em>Rúbrica para evaluar el trabajo en equipo</em></span> <span class="license">(<a href="http://creativecommons.org/licenses/" rel="license nofollow noopener" target="_blank" title="Creative Commons CC-BY-SA">CC BY-SA</a>)</span></p><ul class="exe-rubric-strings"><li class="activity">Actividad</li><li class="name">Nombre</li><li class="date">Fecha</li><li class="score">Puntuación</li><li class="notes">Notas</li><li class="reset">Reiniciar</li><li class="print">Imprimir</li><li class="apply">Aplicar</li><li class="newWindow">Ventana nueva</li></ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_eng_rubrica" id="id674">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">¡Evaluamos a nuestro profesor!</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta674_1384_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p>Evaluar a tu profesor o profesora es una forma de dar tu opinión sobre su práctica docente, es decir, sobre cómo te enseña y cómo te ayuda a aprender. Evaluar a tu profesor o profesora es importante por varias razones:</p>
+<ul>
+<li>Te permite expresar tu grado de satisfacción o insatisfacción con la forma en que se imparte la asignatura, y hacer sugerencias para mejorarla.</li>
+<li>Te ayuda a reflexionar sobre tu propio proceso de aprendizaje, y a identificar los aspectos que te facilitan o dificultan el estudio.</li>
+<li>Te hace partícipe de la mejora de la calidad educativa, y te responsabiliza de tu formación.</li>
+<li>Te permite establecer una comunicación más fluida y constructiva con tu profesor o profesora, y mejorar la relación entre el alumnado y el profesorado.</li>
+<li>Permite a tu profesor mejorar en su labor docente.<strong></strong></li>
+</ul>
+<p><strong><a href="https://docs.google.com/forms/d/e/1FAIpQLScCVdM4qpvg88F-ihppysKBwUQ1JqAjrK-dJjrkon8-3Yb3BQ/viewform?usp=sf_link">Accede al cuestionario de evaluación docente con tu cuenta&nbsp;@g.educaand.es</a></strong></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>Evaluar a tu profesor o profesora implica dar tu opinión sobre su enseñanza y aprender.</p>
+<p>Es importante porque te permite expresar satisfacción o insatisfacción, reflexionar sobre tu aprendizaje, mejorar la calidad educativa, fortalecer la comunicación y ayudar a tu profesor a mejorar.</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div id="packageLicense" class="cc cc-by-nc-sa">
+<p><span>Obra publicada con</span> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Licencia Creative Commons Reconocimiento No comercial Compartir igual 4.0</a></p>
+</div>
+</section>
+</div>
+<div id='bottomPagination'>
+<nav class="pagination noprt">
+<a href="4_aplicando_lo_aprendido.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><span class="page-counter">Página <strong>15</strong> de <strong>15</strong></span>
+</nav>
+</div>
+</div>
+<p id="made-with-eXe"><a href="https://exelearning.net/" target="_blank" rel="noopener"><span>Creado con eXeLearning<span> (Ventana nueva)</span></span></a></p><script type="text/javascript" src="_intef_js.js"></script></body></html>
